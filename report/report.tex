@@ -1,0 +1,179 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}
+\usepackage{paralist}
+\usepackage{listings}
+\usepackage{booktabs}
+
+\oddsidemargin 0mm
+\evensidemargin 0mm
+\textwidth 160mm
+\textheight 200mm
+
+\pagestyle {plain}
+\pagenumbering{arabic}
+
+\newcounter{stepnum}
+
+\title{Assignment 1 Solution}
+\author{Harshil Modi Modih1}
+\date{\today}
+
+\begin {document}
+
+\maketitle
+
+The purpose of Part 1 of this software design exercise was to write a Python program that matches the natural language specification provided. In part 2, design critique was done based on experience with a classmate's implementation.
+
+\section{Testing of the Original Program}
+
+For testing my program I decided on using the unit testing framework pytest. For the test cases I ensured that I had enough cases to test each and every line of my program hence the sixteen test cases.\\\\SUMMARY OF RESULTS:\\
+test\_sort: PASSED\\
+test\_sort\_1: PASSED\\
+test\_sort\_2: PASSED\\
+test\_sort\_3: PASSED\\
+test\_average: PASSED\\
+test\_average1: PASSED\\
+test\_average3: PASSED\\
+test\_average4: PASSED\\
+test\_average5: PASSED\\
+test\_allocate: PASSED\\
+test\_allocate1: PASSED\\
+test\_allocate2: PASSED\\
+test\_allocate3: PASSED\\
+test\_allocate4: PASSED\\
+test\_allocate5: PASSED\\
+test\_allocate6: PASSED\\
+test\_allocate7: PASSED\\\\
+Rational for test cases:\\\\
+test\_sort(): This test case contains 24 different students. The goal of this test case is to test the accuracy of the function sort for large datasets. Having a larger dataset then provided would not be efficient and would be tiresome to manually input the compare dictionary.\\\\
+test\_sort\_1(): This test case contains no students. The goal of this test case is to test if the function sort can handle a situation where no student are present.\\\\
+test\_sort\_2(): This test case contains a few students with a GPA of zero. The goal of this test case is to test if the function sort can handle a situation where a few students have a GPA of zero.\\\\
+test\_sort\_3(): This test case contains all students with the same GPA. The goal of this test case is to test if the function sort can handle a situation where all the students have the same GPA.\\\\
+test\_average(): This test case contains 24 different students. The goal of this test case is to test the accuracy of the function average for large datasets when the second input parameter 'g' is female. Having a larger dataset would be very tedious and tiresome for testing purposes.\\\\
+test\_average1(): This test case also contains 24 different students. The goal of this test case is to test the accuracy of the function average for large datasets when the second input parameter 'g' is male. Again, Having a larger dataset would be very tedious and tiresome for testing purposes.\\\\
+test\_average3(): This test case contains no female students. The goal of this test case is to test if the function average can handle a situation where the denominator(number of female students) is zero.\\\\
+test\_average4(): This test case contains no male students. The goal of this test case is to test if the function average can handle a situation where the denominator(number of male students) is zero.\\\\
+test\_average5(): This test case contains all students with the same GPA. The goal of this test case is to test if the function average can handle a situation where all the student GPA are the same.\\\\
+test\_allocate(): This test case contains a situation where the free choice file contains names of students not present in textfile. The goal of this function is to ensure the program allocate ignore those students and only work with students that are in the textfile.\\ \\
+test\_allocate1(): This test case contains students without free choice and a GPA of less then 4.0. The goal of this test case is to ensure that the function allocate does not allocate these students to a second-year department.\\\\
+test\_allocate2(): This test case contains a large dataset which represents a random typical situation. A few students have free choice, a few students will need to be allocated to their second choice which a few to their third. The goal of this function is to ensure that everything works correctly when put together.\\\\
+test\_allocate3(): This test case contains students with free choice and a GPA of less then 4.0. The goal of this test case is to ensure that the function allocate does not allocate these students to a second-year department.\\ \\
+test\_allocate4(): The goal of this test case is to ensure that students without free choice are allocated into their second choice if the first choice is full and second choice is not.\\ \\ 
+test\_allocate5(): The goal of this test case is to ensure that students without free choice are allocated into their third choice if both the first and second choices are full.\\\\
+test\_allocate6(): The goal of this test case is to ensure that students without free choice are allocated into their third choice even when all three of their choices are full. This approach was choose because these students need to be put into a department. This does not represent the real situation as student generally choose 12 choices and not 3.\\\\
+test\_allocate7(): The goal of this test case is to ensure that students with free choice are allocated into their first choice even when anyone of their choices are full. This approach was choose because a commitment was made by the department that these students have the right of choice and can not be taken away from them. For this situation, a special accommodation is made in this situation.\\
+
+
+
+
+\section{Results of Testing Partner's Code}
+
+SUMMARY OF RESULTS:\\
+test\_sort: PASSED\\
+test\_sort\_1: PASSED\\
+test\_sort\_2: PASSED\\
+test\_sort\_3: PASSED\\
+test\_average: FAILED\\
+test\_average1: FAILED\\
+test\_average3: PASSED\\
+test\_average4: PASSED\\
+test\_average5: PASSED\\
+test\_allocate: FAILED\\
+test\_allocate1: FAILED\\
+test\_allocate2: FAILED\\
+test\_allocate3: FAILED\\
+test\_allocate4: FAILED\\
+test\_allocate5: FAILED\\
+test\_allocate6: FAILED\\
+test\_allocate7: FAILED\\
+
+
+\section{Discussion of Test Results}
+Assumptions made:
+\begin{enumerate}[(1)]
+
+\item All .txt files must be in the correct format provided.
+\item GPA must be a non-negative float or int.
+\item parameter g must be either 'male' or 'female' only.
+\item Average GPA is rounded to two decimal places
+\item The number of students with free choice and first choice to a particular department does not exceed the department capacity.
+\item If the first choice and second choice of a student is full, third choice must not be full or an exception will be made.
+\item students with GPA of 4.0 are not allocated to second-year.
+\item A case where 2 students having the same GPA and one space left will not be present.       
+
+\end{enumerate}
+Original file:
+All 16 of the test cases passed flawlessly.\\\\
+Partner's file:
+7 out of 16 test cases passed. All the test cases regarding sort function passed. 3 out of 5 of the test cases regarding the average function passed. 0 out of 8 of the test cases regarding the allocate function passed.\\ 
+
+
+\subsection{Problems with Original Code}
+There were no problems with the original code as all the test cases passed.
+
+\subsection{Problems with Partner's Code}
+For the sort function, there was no problem with my Partner's code and my implementation as all the test cases passed. However for the average function only 3 out of 5 cases passed. The reason that the first 2 cases failed was do to a rounding point error. In my implementation, I rounded the average to two decimal points while my partner's implementation did not. For the allocate function, my partner's program was not fully functional as it contained local variables before assignment (Even after changing this, my partner's code broke because it was not complete). Since my partner's implementation was not correct, all the test cases for the allocate function failed. Overall, due to non specific design implementation criteria, I and my partner's implementation varied a little. 
+
+\section{Critique of Design Specification}
+
+Although the assignment was mostly open ended as we had the choice of choosing most of our design decisions, a few of these specification were forced upon us. These included the data structure of students, free choice, and department capacity. I liked how this was forced upon us as it provided me with a guideline of how to build the functions. Although this was not necessary, having a guideline made my work easier as I had to do less work figuring out the types of data structures to use and implement. I also liked the open ended design specification for the textfile as it allowed us to create the textfiles to my convinces. What I did not like was the fact that free choice was not a key value pair in the student dictionary but was returned in a separate list by the readFreeChoices function. Having it along side the other information would make it more organized. Although the design was mostly open ended, when it came to testing the partner's files this caused major problems. This was because there was no structure to follow and as a result each of us had our own implementation. Next time, if comparisons between individual's implementation was going to be made, a less open ended design specification would be preferred.
+
+%\newpage
+
+\section{Answers to Questions}
+
+\begin{enumerate}[(a)]
+
+\item To make the average function more general, I would eliminate the need for inputting the 'g' parameter. I would instead generalize the new average function to return the average of all students, all males, and all females. This eliminates the need to provide a second parameter making the function more versatile while also providing the ability of the function to generate the overall student GPA which is something the original average function lacks. On a similar note, to make the sort function more general I would change it to sort based on any characteristics and not only GPA (e.g alphanumeric characters). It would be the user's preference to choose the characteristic to sort by.
+
+\item In this context aliasing is when one variable's values are also values of another variable and can be mutated from either variables. This is especially true in python with mutable data structures as variables are just names that store references to values. Since dictionaries in python is a mutable data structure, aliasing can be a major problem if care is not taken. For example if variable a is assigned a dictionary, and b is assigned a, any change made to b would directly result in a change in a. To guard against potential problems due to aliasing, I would use the copy function for copying a list or dictionary instead of assignment. This way, I will always have 2 distinct copies of information and aliasing would be avoided it.
+
+\item Some potential test cases I could have used to test ReadAllocationData.py would to check if the functions can read large datasets, medium sized datasets and no datasets. Testing of large datasets is important to ensure that read files does not have upper bound. The medium sized dataset would be used to just mimic an average dataset hence test the general functionality of the functions. The no dataset modules would be used to test for edge cases. The reason that CalcModule.py was used to test the functionality of the program was because the module CalcModule relies heavy on the ReadAllocationData module but is also more complex then the ReadAllocationData module. As a result, if the test cases pass of the CalcModule we can infer that ReadAllocationData module must also be correct. However, if we were to test just ReadAllocationData, we would not be able to infer that CalcModule is correct as ReadAllocationData does not rely on the CalcModule.
+
+\item The problems with using strings in this case to represent keys for a dictionary or a finite set is that strings are case sensitive. For example a person may input "female" while another person inputs "Female". Although the intent was the same from both users, The end result is different hence they are 2 distinct keys with different sets. A better way would be to use numerical values to represent strings such as 1 = male and 2 = female. This way ambiguity and errors will be reduced. Another problem with using strings is that comparisons are expensive. For example, to compare a string, you will need to compare each character individually and this can take longer then numerical values. 
+
+\item A mathematical tuple is a data structure which contain a collection of elements of different types. To implement a mathematical tuple in python similar to a dictionary, we can use namedtuples. The main difference between dictionaries and namedtuples is that namedtuples are immutable. I would recommend, that we a change the implemntation of a dictionary to named tuples because once we create our dictionaries, we are not modifying them. By change the structure to a namedtuple, it would reduce the changes of someone accidentally modifying the data structure. To change this, I would add the unique identifier or the key and the value to the tuple while reading the file. Another option to do this is to use class. We can define an abstract data structure or a student class which contains the required information as instance variables. This would be a good idea to implement as it can make the program easier to organize. To implement this, I would create a new class called student which contains its information as instance variables. Then in the main class I would create a new object of type student for each student.
+
+\item For my implementation, if the list of choices were changed to a tuple, I would not need to change CalcModule.py. This is because I do not modify the list or the order of the choices but only access the information. If I did, then I would need to change up CalcModule since in a tuple this would not be possible as they are immutable. If we after add an abstract data type to our code which returns the value of the next choice when the current choice is full, I would need to modify my code. This is because I currently don't have a counter to count if the department is full but instead keep getting the length of the string to determine the number of people. In the abstract data type, I would need to add another variable to determine if the department is full or some other way keep a track of the department capacities. Lets say that the software implements this, I would change my current code to not check if department is full as I currently check that per student. For my implementation, even if the lists was changed to a tuple, I would still not need to change my code as I still would be able to access the information and get the length of the tuple. This was because I made my code in a way to not require me to use new variables or modify the current list. 
+
+\end{enumerate}
+
+\newpage
+
+\lstset{language=Python, basicstyle=\tiny, breaklines=true, showspaces=false,
+  showstringspaces=false, breakatwhitespace=true}
+%\lstset{language=C,linewidth=.94\textwidth,xleftmargin=1.1cm}
+
+\def\thesection{\Alph{section}}
+
+\section{Code for ReadAllocationData.py}
+
+\noindent \lstinputlisting{../src/ReadAllocationData.py}
+
+\newpage
+
+\section{Code for CalcModule.py}
+
+\noindent \lstinputlisting{../src/CalcModule.py}
+
+\newpage
+
+\section{Code for testCalc.py}
+
+\noindent \lstinputlisting{../src/testCalc.py}
+
+\newpage
+
+\section{Code for Partner's CalcModule.py}
+
+\noindent \lstinputlisting{../partner/CalcModule.py}
+
+\newpage
+
+\section{Makefile}
+
+\lstset{language=make}
+\noindent \lstinputlisting{../Makefile.}
+
+\end {document}
