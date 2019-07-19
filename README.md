@@ -1,2 +1,2 @@
 # Student_Program_Distributor
-Allocates first year student to their specialization for McMaster University
+Allocates first year McMaster University students to their specialization.
